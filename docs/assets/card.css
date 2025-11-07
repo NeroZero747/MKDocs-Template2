@@ -1,0 +1,197 @@
+/* Namespace wrapper so styles don't leak */
+.ui-cards {
+  --radius: 16px;
+  --border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 12%, transparent);
+}
+.ui-cards .toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px;
+  border: var(--border);
+  border-radius: calc(var(--radius) + 6px);
+  background: color-mix(in oklab, var(--md-default-bg-color) 92%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--md-shadow-z2);
+}
+.ui-cards .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.ui-cards .logo {
+  inline-size: 32px;
+  block-size: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    var(--md-accent-fg-color),
+    color-mix(in oklab, var(--md-primary-fg-color) 70%, transparent)
+  );
+  color: white;
+  font-weight: 800;
+  box-shadow: var(--md-shadow-z3);
+}
+.ui-cards .actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.ui-cards .btn {
+  --_bg: var(--md-default-bg-color);
+  --_fg: var(--md-default-fg-color);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: var(--border);
+  background: var(--_bg);
+  color: var(--_fg);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  box-shadow: var(--md-shadow-z1);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+.ui-cards .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--md-shadow-z3);
+}
+.ui-cards .btn:focus-visible {
+  outline: none;
+  box-shadow: var(--md-shadow-z3),
+    0 0 0 3px color-mix(in oklab, var(--md-accent-fg-color) 35%, transparent);
+}
+.ui-cards .btn.primary {
+  background: linear-gradient(
+    135deg,
+    var(--md-primary-fg-color),
+    var(--md-accent-fg-color)
+  );
+  color: #fff;
+  border-color: transparent;
+}
+
+.ui-cards .grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.ui-cards .card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--md-default-bg-color);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--md-shadow-z2);
+  overflow: clip;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+.ui-cards .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--md-shadow-z4);
+  border-color: color-mix(in oklab, var(--md-accent-fg-color) 28%, transparent);
+}
+.ui-cards .media {
+  aspect-ratio: 16/9;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--md-primary-fg-color) 30%, transparent),
+    color-mix(in oklab, var(--md-accent-fg-color) 30%, transparent)
+  );
+}
+.ui-cards .content {
+  padding: 14px 14px 6px;
+  display: grid;
+  gap: 10px;
+}
+.ui-cards .title {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  font-size: 1.05rem;
+}
+.ui-cards .sub {
+  opacity: 0.85;
+}
+.ui-cards .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ui-cards .chip {
+  padding: 6px 10px;
+  border: var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  opacity: 0.9;
+  background: color-mix(in oklab, var(--md-accent-fg-color) 10%, transparent);
+}
+.ui-cards .actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px 14px;
+  border-top: var(--border);
+  background: color-mix(in oklab, var(--md-default-bg-color) 94%, transparent);
+}
+.ui-cards .btn.icon {
+  padding: 8px 10px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ui-cards .btn.icon svg {
+  inline-size: 18px;
+  block-size: 18px;
+}
+.ui-cards .btn.icon[aria-pressed="true"] {
+  outline: none;
+  box-shadow: 0 0 0 3px
+    color-mix(in oklab, var(--md-accent-fg-color) 35%, transparent);
+}
+.ui-cards .price {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+.ui-cards .progress {
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--md-default-fg-color) 8%, transparent);
+  overflow: hidden;
+  border: var(--border);
+}
+.ui-cards .progress > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--md-primary-fg-color),
+    var(--md-accent-fg-color)
+  );
+  width: var(--val, 42%);
+}
+
+/* Compact density modifier */
+html.compact .ui-cards {
+  --radius: 12px;
+}
+html.compact .ui-cards .btn {
+  padding: 7px 10px;
+  border-radius: 10px;
+}
+html.compact .ui-cards .content {
+  padding: 12px 12px 6px;
+}
+html.compact .ui-cards .actions-row {
+  padding: 8px 10px 12px;
+}

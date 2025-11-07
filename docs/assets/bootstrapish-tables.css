@@ -1,0 +1,164 @@
+/* Bootstrap‑ish table theme (works for Simple‑DataTables and Grid.js)
+   Usage: wrap your table in <div class="table-bs table-striped table-hover table-sm"> … */
+
+:root {
+  /* Map to Material palette so it respects light/dark */
+  --bs-bg: var(--md-default-bg-color);
+  --bs-fg: var(--md-default-fg-color);
+  --bs-border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 18%, transparent);
+  --bs-border-row: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 12%, transparent);
+  --bs-muted: color-mix(in oklab, var(--md-default-fg-color) 65%, transparent);
+  --bs-primary: var(--md-primary-fg-color);
+  --bs-radius: 0.5rem;
+  --bs-pad-y: 0.6rem; /* cell padding */
+  --bs-pad-x: 0.8rem;
+}
+
+/* Wrapper (apply Bootstrap‑like look) */
+.table-bs {
+  background: var(--bs-bg);
+  border: var(--bs-border);
+  border-radius: var(--bs-radius);
+  overflow: hidden;
+  box-shadow: var(--md-shadow-z1);
+}
+.table-bs:hover {
+  box-shadow: var(--md-shadow-z2);
+}
+
+/* Head */
+.table-bs thead th,
+.table-bs .gridjs-thead th {
+  background: color-mix(in oklab, var(--md-default-fg-color) 6%, transparent);
+  border-bottom: var(--bs-border);
+  font-weight: 600;
+  padding: var(--bs-pad-y) var(--bs-pad-x) !important;
+}
+.table-bs thead th.sticky,
+.table-bs .gridjs-thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Body cells */
+.table-bs tbody td,
+.table-bs .gridjs-tbody td {
+  padding: var(--bs-pad-y) var(--bs-pad-x) !important;
+  border-bottom: var(--bs-border-row);
+}
+.table-bs tbody tr:last-child td,
+.table-bs .gridjs-tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Striped rows */
+.table-bs.table-striped tbody tr:nth-child(2n) td,
+.table-bs.table-striped .gridjs-tr:nth-child(2n) td {
+  background: color-mix(in oklab, var(--md-default-fg-color) 5%, transparent);
+}
+
+/* Hover rows */
+.table-bs.table-hover tbody tr:hover td,
+.table-bs.table-hover .gridjs-tr:hover td {
+  background: color-mix(in oklab, var(--md-primary-fg-color) 12%, transparent);
+}
+
+/* Small (dense) */
+.table-bs.table-sm thead th,
+.table-bs.table-sm tbody td,
+.table-bs.table-sm .gridjs-thead th,
+.table-bs.table-sm .gridjs-tbody td {
+  padding: 0.4rem 0.55rem !important;
+}
+
+/* Inputs (search/select) */
+.table-bs input[type="search"],
+.table-bs select {
+  background: var(--bs-bg);
+  color: var(--bs-fg);
+  border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 22%, transparent);
+  border-radius: 0.375rem;
+  padding: 0.4rem 0.6rem;
+}
+
+/* DataTables chrome */
+.table-bs .dataTable-top,
+.table-bs .dataTable-bottom {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.75rem;
+  border-top: var(--bs-border);
+  border-bottom: var(--bs-border);
+  background: color-mix(in oklab, var(--md-default-fg-color) 4%, transparent);
+}
+.table-bs .dataTable-bottom {
+  border-top: var(--bs-border);
+  border-bottom: none;
+}
+.table-bs .dataTable-pagination a {
+  border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 22%, transparent);
+  border-radius: 50rem;
+  padding: 0.25rem 0.6rem;
+}
+.table-bs .dataTable-pagination .active a {
+  background: color-mix(in oklab, var(--bs-primary) 25%, transparent);
+  color: var(--md-default-bg-color);
+}
+.table-bs .dataTable-info {
+  color: var(--bs-muted);
+}
+
+/* Grid.js chrome */
+.table-bs .gridjs-search {
+  padding: 0.6rem 0.75rem;
+  border-bottom: var(--bs-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.table-bs .gridjs-footer {
+  padding: 0.6rem 0.75rem;
+  border-top: var(--bs-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.table-bs .gridjs-pages button {
+  border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 22%, transparent) !important;
+  border-radius: 50rem !important;
+  padding: 0.25rem 0.6rem !important;
+}
+.table-bs .gridjs-pages .gridjs-currentPage {
+  background: color-mix(
+    in oklab,
+    var(--bs-primary) 25%,
+    transparent
+  ) !important;
+  color: var(--md-default-bg-color) !important;
+}
+
+/* Header-embedded filters support */
+.table-bs .th-wrap {
+  display: grid;
+  gap: 4px;
+}
+.table-bs .th-label {
+  font-weight: 600;
+  line-height: 1.1;
+}
+.table-bs .th-filter input,
+.table-bs .th-filter select {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 22%, transparent);
+}

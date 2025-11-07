@@ -1,0 +1,213 @@
+site_name: Ultimate Material Playground (ETL Docs)
+site_description: A complete demo of Material for MkDocs features tailored to Python ETL documentation
+site_url: https://example.gitlab.io/etl-docs
+repo_url: https://gitlab.com/your-group/your-project
+repo_name: your-group/your-project
+edit_uri: -/edit/main/docs/
+
+theme:
+  name: material
+  # custom_dir: docs/overrides
+  language: en
+  icon:
+    repo: fontawesome/brands/gitlab
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  font:
+    text: Inter
+    code: "Fira Code"
+  palette:
+    - scheme: default
+      primary: blue grey
+      accent: blue grey
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue grey
+      accent: blue grey
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.path
+    - navigation.top
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.indexes
+    - toc.integrate
+    - header.autohide
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+
+watch:
+  - src
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - sane_lists
+  - tables
+  - abbr
+  - smarty
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: your-group
+      repo: your-project
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.critic
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.keys
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+
+plugins:
+  - search
+  - tags
+  - section-index
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+            show_root_heading: true
+            docstring_style: google
+            docstring_section_style: table
+            inherited_members: true
+            members_order: source
+            separate_signature: true
+            show_signature: true
+            signature_crossrefs: true
+  - glightbox
+  - minify:
+      minify_html: true
+  - macros:
+      include_dir: docs/_includes
+  - redirects
+  - table-reader
+  # - git-revision-date-localized:
+  #     enable_creation_date: true
+  #     fallback_to_build_date: true
+  #     type: date
+  # - git-committers:
+  #     repository: squidfunk/mkdocs-material
+  # - git-authors
+
+nav:
+  - Home: index.md
+  - Playground:
+      - Overview: playground/index.md
+      - UI Components: playground/ui/components.md
+      - Layouts & Grids: playground/layouts/layouts.md
+      - Data Tables: playground/data/tables.md
+      - Advanced Tables: playground/data/advanced-tables.md
+      - Dashboards: playground/data/dashboards.md
+      - Shortcodes & Macros: playground/ui/macros.md
+  - Overview:
+      - Architecture: overview/architecture.md
+      - Lineage: overview/lineage.md
+  - ETL Pipelines:
+      - Jobs:
+          - Providers: etl/jobs/providers.md
+          - Members: etl/jobs/members.md
+          - Claims: etl/jobs/claims.md
+  - Operations:
+      - Runbook: operations/runbook.md
+      - Troubleshooting: operations/troubleshooting.md
+  - Reference:
+      - API (Python): reference/api.md
+      - Changelog: reference/changelog.md
+      - Glossary: reference/glossary.md
+
+extra:
+  author: "your name"
+  publisher: "team name"
+  social:
+    - icon: fontawesome/brands/gitlab
+      link: https://gitlab.com/your-group/your-project
+    - icon: fontawesome/brands/python
+      link: https://www.python.org
+    - icon: fontawesome/solid/user
+      link: "#"
+      name: "Documentation published by your name"
+  generator: false
+  brand:
+    name: "team name"
+    shortname: "short name"
+    colors:
+      primary: "#CB187D" # raspberry
+      gray: "#6D6E71" # cool gray
+      teal: "#00897B" # teal
+      orange: "#FF7043" # orange
+    package: "etl_example"
+
+# === One merged block EACH ===
+extra_javascript:
+  - javascripts/theme-sync.js      # must come BEFORE mermaid-init.js
+  # Mermaid (choose ONE version total)
+  - https://unpkg.com/mermaid@11.2.1/dist/mermaid.js
+  - javascripts/mermaid-init.js
+
+  # Table libraries (load both only if you target different tables)
+  - https://cdn.jsdelivr.net/npm/simple-datatables@9.0.0/dist/umd/simple-datatables.min.js
+  - javascripts/tables-init.js
+  - https://unpkg.com/gridjs/dist/gridjs.umd.js
+  - javascripts/grid-init.js
+
+  # Utilities
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
+
+  # Card UI interactions
+  - javascripts/card.js
+
+extra_css:
+  - https://cdn.jsdelivr.net/npm/simple-datatables@9.0.0/dist/style.css
+  - https://unpkg.com/gridjs/dist/theme/mermaid.min.css
+  - assets/extra.css
+  - assets/card.css
+  - assets/tables.css               # your current modern theme (optional)
+  - assets/bootstrapish-tables.css  # ← NEW unified Bootstrap‑ish theme
+  - https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.20/400.css
+  - https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.20/600.css
+  - https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.10/400.css
+
+strict: true

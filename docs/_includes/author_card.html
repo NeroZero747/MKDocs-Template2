@@ -1,0 +1,37 @@
+{# docs/_includes/author_card.html #}
+{%- set author =
+    (page.meta.author if page is defined and page and page.meta and page.meta.author)
+    or (author if author is defined and author)
+    or (config.extra.author) -%}
+
+{%- set publisher =
+    (page.meta.publisher if page is defined and page and page.meta and page.meta.publisher)
+    or (publisher if publisher is defined and publisher)
+    or (config.extra.publisher) -%}
+
+{%- if author or publisher -%}
+<div class="card author-card">
+  <div class="card-body">
+    <div class="card-row">
+      {%- if author -%}
+      <div class="card-item">
+        <span class="md-icon">{% include ".icons/material/account.svg" %}</span>
+        <div>
+          <div class="card-title">Author</div>
+          <div class="card-text">{{ author }}</div>
+        </div>
+      </div>
+      {%- endif -%}
+      {%- if publisher -%}
+      <div class="card-item">
+        <span class="md-icon">{% include ".icons/material/domain.svg" %}</span>
+        <div>
+          <div class="card-title">Publisher</div>
+          <div class="card-text">{{ publisher }}</div>
+        </div>
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}

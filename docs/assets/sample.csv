@@ -1,0 +1,4 @@
+job,owner,schedule,sla_minutes
+providers,DART,02:00,15
+members,DART,03:00,20
+claims,DART,Hourly,30

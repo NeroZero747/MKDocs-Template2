@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern Card UI – Clean & Responsive</title>
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    /* -----------------------------
+       Base & Design Tokens
+       ----------------------------- */
+    :root{
+      --bg: #0b0c10;
+      --bg-elev: #111218;
+      --panel: #141622;
+      --card: #161827;
+      --text: #e8eaf2;
+      --muted: #a9aec1;
+      --border: #26293a;
+      --brand: #7c5cff;
+      --brand-2: #22d3ee;
+      --accent: #8b5cf6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --radius: 16px;
+      --shadow-1: 0 1px 2px rgba(0,0,0,.15);
+      --shadow-2: 0 6px 24px rgba(0,0,0,.22);
+      --ring: 0 0 0 3px color-mix(in srgb, var(--brand) 32%, transparent);
+      --blur: 12px;
+      --trans-fast: 120ms;
+      --trans: 220ms;
+    }
+
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f6f7fb;
+        --bg-elev: #ffffff;
+        --panel: #ffffff;
+        --card: #ffffff;
+        --text: #0b1020;
+        --muted: #4e556b;
+        --border: #e8eaf2;
+        --shadow-1: 0 1px 2px rgba(13, 37, 62, .06);
+        --shadow-2: 0 8px 30px rgba(13, 37, 62, .08);
+        --ring: 0 0 0 3px color-mix(in srgb, var(--brand) 26%, transparent);
+      }
+    }
+
+    /* Manual override via [data-theme] */
+    html[data-theme="dark"]{
+      --bg: #0b0c10;
+      --bg-elev: #111218;
+      --panel: #141622;
+      --card: #161827;
+      --text: #e8eaf2;
+      --muted: #a9aec1;
+      --border: #26293a;
+      --shadow-1: 0 1px 2px rgba(0,0,0,.15);
+      --shadow-2: 0 6px 24px rgba(0,0,0,.22);
+      --ring: 0 0 0 3px color-mix(in srgb, var(--brand) 32%, transparent);
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin: 0;
+      font: 15px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1600px 1000px at 10% -10%, color-mix(in srgb, var(--brand) 6%, transparent), transparent 60%),
+                  radial-gradient(1200px 800px at 120% 10%, color-mix(in srgb, var(--brand-2) 6%, transparent), transparent 60%),
+                  var(--bg);
+    }
+
+    .wrap{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 20px 80px;
+    }
+
+    /* -----------------------------
+       Header / Toolbar
+       ----------------------------- */
+    .toolbar{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      background: color-mix(in srgb, var(--panel) 92%, transparent);
+      backdrop-filter: blur(var(--blur));
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow-1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .logo{
+      inline-size: 36px; block-size: 36px;
+      display: grid; place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: var(--shadow-2);
+      color: white;
+      font-weight: 800;
+    }
+
+    .actions{ display: flex; gap: 10px; align-items: center; }
+
+    .btn{
+      --_bg: var(--card);
+      --_fg: var(--text);
+      --_bd: var(--border);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--_bd);
+      background: var(--_bg);
+      color: var(--_fg);
+      font-weight: 600;
+      letter-spacing: .2px;
+      box-shadow: var(--shadow-1);
+      cursor: pointer;
+      transition: transform var(--trans-fast) ease, box-shadow var(--trans) ease, background var(--trans) ease, border-color var(--trans) ease;
+    }
+
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-2); }
+    .btn:active{ transform: translateY(0); box-shadow: var(--shadow-1); }
+    .btn:focus-visible{ outline: none; box-shadow: var(--shadow-2), var(--ring); }
+
+    .btn.primary{
+      --_bg: linear-gradient(135deg, color-mix(in srgb, var(--brand) 92%, transparent), color-mix(in srgb, var(--brand-2) 92%, transparent));
+      --_fg: white;
+      --_bd: transparent;
+    }
+
+    /* -----------------------------
+       Cards Grid
+       ----------------------------- */
+    .grid{
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card{
+      position: relative;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      background: color-mix(in srgb, var(--card) 94%, transparent);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-1);
+      overflow: clip;
+      transition: transform var(--trans) ease, box-shadow var(--trans) ease, border-color var(--trans) ease;
+      isolation: isolate; /* let overlay effects sit above */
+    }
+
+    .card::after{ /* subtle gradient edge */
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient( to bottom right,
+        color-mix(in srgb, var(--brand) 9%, transparent),
+        transparent 35%,
+        color-mix(in srgb, var(--brand-2) 9%, transparent)
+      );
+      opacity: .0;
+      transition: opacity var(--trans) ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-2); border-color: color-mix(in srgb, var(--brand) 24%, var(--border)); }
+    .card:hover::after{ opacity: .16; }
+
+    .media{
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 25%, transparent), color-mix(in srgb, var(--brand-2) 25%, transparent));
+      position: relative; overflow: hidden;
+    }
+    .media svg{
+      position: absolute; inset: 0; width: 100%; height: 100%; opacity: .12;
+      filter: blur(2px);
+      transform: scale(1.1);
+    }
+
+    .content{ padding: 16px 16px 6px; display: grid; gap: 10px; }
+    .title{ font-weight: 800; letter-spacing: .2px; font-size: 1.05rem; }
+    .sub{ color: var(--muted); font-size: .9rem; }
+
+    .chips{ display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip{
+      padding: 6px 10px; border: 1px solid var(--border);
+      border-radius: 999px; font-size: .8rem; color: var(--muted);
+      background: color-mix(in srgb, var(--panel) 66%, transparent);
+    }
+
+    .actions-row{
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      padding: 10px 12px 14px; border-top: 1px solid var(--border);
+      background: color-mix(in srgb, var(--panel) 42%, transparent);
+    }
+
+    .btn.icon{
+      padding: 8px 10px; border-radius: 10px; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn.icon svg{ inline-size: 18px; block-size: 18px; }
+    .btn.icon[aria-pressed="true"]{ outline: none; box-shadow: var(--ring); }
+
+    .price{ font-weight: 800; letter-spacing: .2px; }
+
+    /* Progress bar example */
+    .progress{
+      height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--panel) 50%, transparent);
+      overflow: hidden; border: 1px solid var(--border);
+    }
+    .progress > i{ display: block; height: 100%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); width: var(--val, 42%); }
+
+    /* Accessibility + Motion */
+    :focus-visible{ outline: none; box-shadow: var(--ring); }
+    @media (prefers-reduced-motion: reduce){
+      *{ transition-duration: 1ms !important; animation-duration: 1ms !important; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="toolbar" role="banner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">UI</div>
+        <span>Modern Card UI</span>
+      </div>
+      <div class="actions">
+        <button class="btn" id="toggleDensity" type="button" aria-pressed="false" title="Toggle compact density">Density</button>
+        <button class="btn" id="toggleTheme" type="button" aria-pressed="false" title="Toggle dark / light theme">Theme</button>
+        <button class="btn primary" type="button" title="Primary action">New</button>
+      </div>
+    </header>
+
+    <main class="grid" aria-live="polite">
+      <!-- Card 1 -->
+      <article class="card" tabindex="0" aria-label="Pro plan">
+        <div class="media" aria-hidden="true">
+          <!-- Decorative background lines -->
+          <svg viewBox="0 0 600 338" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="g" x1="0" x2="1">
+                <stop offset="0" stop-color="currentColor"/>
+                <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g opacity=".8">
+              <rect x="0" y="40" width="600" height="1" fill="url(#g)" />
+              <rect x="0" y="100" width="600" height="1" fill="url(#g)" />
+              <rect x="0" y="160" width="600" height="1" fill="url(#g)" />
+              <rect x="0" y="220" width="600" height="1" fill="url(#g)" />
+              <rect x="0" y="280" width="600" height="1" fill="url(#g)" />
+            </g>
+          </svg>
+        </div>
+        <div class="content">
+          <h2 class="title">Pro Plan</h2>
+          <p class="sub">Everything you need to launch and scale your next project.</p>
+          <div class="chips" aria-label="Features">
+            <span class="chip">Unlimited Projects</span>
+            <span class="chip">SLA 99.9%</span>
+            <span class="chip">Analytics</span>
+          </div>
+          <div class="progress" aria-label="Usage"><i style="--val:70%"></i></div>
+        </div>
+        <div class="actions-row">
+          <span class="price" aria-label="Price">$19/mo</span>
+          <div>
+            <button class="btn icon js-fav" type="button" aria-pressed="false" aria-label="Add to favorites">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span>Favorite</span>
+            </button>
+            <button class="btn icon" type="button" aria-label="Buy Pro">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <span>Buy</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card" tabindex="0" aria-label="Starter plan">
+        <div class="media" aria-hidden="true"></div>
+        <div class="content">
+          <h2 class="title">Starter</h2>
+          <p class="sub">Get going quickly with generous limits and no commitments.</p>
+          <div class="chips">
+            <span class="chip">1 Workspace</span>
+            <span class="chip">500k API calls</span>
+          </div>
+        </div>
+        <div class="actions-row">
+          <span class="price">Free</span>
+          <button class="btn icon js-fav" type="button" aria-pressed="false" aria-label="Add to favorites">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span>Favorite</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card" tabindex="0" aria-label="Enterprise plan">
+        <div class="media" aria-hidden="true"></div>
+        <div class="content">
+          <h2 class="title">Enterprise</h2>
+          <p class="sub">SAML/SSO, dedicated support, and custom SLAs for large teams.</p>
+          <div class="chips">
+            <span class="chip">SAML/SSO</span>
+            <span class="chip">Audit Logs</span>
+            <span class="chip">Priority Support</span>
+          </div>
+        </div>
+        <div class="actions-row">
+          <span class="price">Contact us</span>
+          <button class="btn icon" type="button" aria-label="Talk to Sales">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            <span>Talk</span>
+          </button>
+        </div>
+      </article>
+
+    </main>
+  </div>
+
+  <script>
+    // Theme toggling with localStorage persistence; respects system by default
+    (function(){
+      const root = document.documentElement;
+      const btnTheme = document.getElementById('toggleTheme');
+      const btnDensity = document.getElementById('toggleDensity');
+
+      const savedTheme = localStorage.getItem('theme');
+      if(savedTheme){ root.setAttribute('data-theme', savedTheme); }
+
+      function setTheme(next){
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        btnTheme.setAttribute('aria-pressed', String(next === 'dark'));
+      }
+
+      btnTheme.addEventListener('click', () => {
+        const mode = root.getAttribute('data-theme');
+        const next = mode === 'dark' ? 'auto' : 'dark';
+        setTheme(next);
+      });
+
+      // Density toggle: adds a compact modifier that tightens paddings and radius
+      btnDensity.addEventListener('click', () => {
+        const compact = root.classList.toggle('compact');
+        btnDensity.setAttribute('aria-pressed', String(compact));
+      });
+
+      // Favorite buttons (ARIA-pressed state toggle)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.js-fav');
+        if(!btn) return;
+        const cur = btn.getAttribute('aria-pressed') === 'true';
+        btn.setAttribute('aria-pressed', String(!cur));
+        btn.classList.toggle('is-active', !cur);
+      });
+    })();
+  </script>
+
+  <style>
+    /* Compact density modifier (tighter paddings / radii) */
+    html.compact{ --radius: 12px; }
+    html.compact .btn{ padding: 8px 12px; border-radius: 10px; }
+    html.compact .toolbar{ padding: 12px 14px; }
+    html.compact .content{ padding: 14px 14px 6px; }
+    html.compact .actions-row{ padding: 8px 10px 12px; }
+
+    /* Example of a subtle active state for favorite */
+    .btn.is-active{ border-color: color-mix(in srgb, var(--brand) 45%, var(--border)); }
+  </style>
+</body>
+</html>

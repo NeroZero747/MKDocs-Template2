@@ -1,0 +1,139 @@
+<!-- {# docs/overrides/main.html #}
+{% extends "base.html" %}
+
+{# ---- Safe meta resolution ---- #}
+{% set _author = config.extra.author %}
+{% set _publisher = config.extra.publisher %}
+{% if page is defined and page and page.meta %}
+  {% if page.meta.author %}{% set _author = page.meta.author %}{% endif %}
+  {% if page.meta.publisher %}{% set _publisher = page.meta.publisher %}{% endif %}
+{% endif %}
+
+{# ---- Put a small meta chip row ABOVE the page content (keep or remove) ---- #}
+{% block content %}
+  {% if _author or _publisher %}
+  <div class="page-meta">
+    {% if _author %}
+      <span class="meta-item">
+        <span class="md-icon">{% include ".icons/material/account.svg" %}</span>
+        <span class="meta-text">{{ _author }}</span>
+      </span>
+    {% endif %}
+    {% if _publisher %}
+      <span class="meta-item">
+        <span class="md-icon">{% include ".icons/material/domain.svg" %}</span>
+        <span class="meta-text">{{ _publisher }}</span>
+      </span>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {# ---- Hidden node; JS will move under repo/site title in the top bar ---- #}
+  {% if _author or _publisher %}
+  <div id="repo-meta" class="repo-meta" hidden>
+    {% if _author %}
+      <span class="meta-item">
+        <span class="md-icon">{% include ".icons/material/account.svg" %}</span>
+        {{ _author }}
+      </span>
+    {% endif %}
+    {% if _publisher %}
+      <span class="meta-item">
+        <span class="md-icon">{% include ".icons/material/domain.svg" %}</span>
+        {{ _publisher }}
+      </span>
+    {% endif %}
+  </div>
+
+  <script>
+  (function () {
+    // Set this to true if you want the chip under repo_name ONLY on homepage
+    var HOME_ONLY = true;
+
+    function isHome() {
+      var html = document.documentElement;
+      if (html && html.getAttribute('data-md-page') === 'index') return true;
+      var p = location.pathname.replace(/\/+$/, '');
+      return p === '' || p.endsWith('/index.html');
+    }
+
+    function findTitleContainer() {
+      // Prefer the dedicated header title container; fall back to older selector
+      return (
+        document.querySelector('[data-md-component="header-title"]') ||
+        document.querySelector('.md-header__title')
+      );
+    }
+
+    function placeMeta() {
+      var meta = document.getElementById('repo-meta');
+      if (!meta) return;
+
+      if (HOME_ONLY && !isHome()) {
+        meta.hidden = true;
+        meta.dataset.moved = '';
+        return;
+      }
+
+      var title = findTitleContainer();
+      if (!title) return;
+
+      // Turn ONLY the title element into a vertical stack so our chip is a new line
+      title.style.display = 'flex';
+      title.style.flexDirection = 'column';
+      title.style.alignItems = 'flex-start';
+
+      // Try to place right after the topic (site/page title)
+      var topic = title.querySelector('.md-header__topic') || title.firstElementChild;
+      if (topic && topic.nextSibling) {
+        topic.insertAdjacentElement('afterend', meta);
+      } else {
+        title.appendChild(meta);
+      }
+
+      meta.hidden = false;
+      meta.dataset.moved = '1';
+    }
+
+    function init() {
+      placeMeta();
+
+      // Re-run on Material's instant navigation
+      if (window.document$) {
+        window.document$.subscribe(function () {
+          var meta = document.getElementById('repo-meta');
+          if (meta) meta.dataset.moved = '';
+          placeMeta();
+        });
+      }
+
+      // Retry if header DOM paints late
+      var header = document.querySelector('.md-header');
+      if (header && window.MutationObserver) {
+        var mo = new MutationObserver(placeMeta);
+        mo.observe(header, { childList: true, subtree: true });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  })();
+  </script>
+  {% endif %}
+
+  {{ super() }}
+{% endblock %}
+
+{# ---- Footer: append publisher safely on all pages ---- #}
+{% block footer %}
+  {{ super() }}
+  {% if _publisher %}
+  <div class="md-footer-meta">
+    <div class="md-footer-meta__inner">
+      <div class="meta-footer">
+        <span class="md-icon">{% include ".icons/material/domain.svg" %}</span>
+        <span>Published by {{ _publisher }}</span>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %} -->

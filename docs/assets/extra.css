@@ -1,0 +1,169 @@
+/* Under repo_name (moved by JS): its own new line */
+.md-header [data-md-component="header-title"] .repo-meta,
+.md-header .md-header__title .repo-meta {
+  display: block;
+  margin-top: 2px;
+  font-size: .74rem;
+  line-height: 1.2;
+  opacity: .9;
+}
+
+.md-header .repo-meta .meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 10px;
+}
+
+.md-header .repo-meta .md-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Optional: hide chip in header on very small screens */
+@media (max-width: 600px) {
+  .md-header [data-md-component="header-title"] .repo-meta,
+  .md-header .md-header__title .repo-meta { display: none; }
+}
+
+/* Page-top chips above content (your existing styling) */
+.page-meta { display:flex; gap:.75rem; align-items:center; margin:.25rem 0 1rem; flex-wrap:wrap; }
+.page-meta .meta-item { display:inline-flex; align-items:center; gap:.4rem; padding:.25rem .6rem; border-radius:999px; background:color-mix(in oklab, var(--md-accent-fg-color) 12%, transparent); font-size:.85rem; }
+.page-meta .md-icon { display:inline-flex; transform:translateY(1px); }
+
+/* Footer chip */
+.meta-footer { display:inline-flex; align-items:center; gap:.5rem; opacity:.85; }
+
+/* ---- Card base ---- */
+.md-typeset .card {
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--md-default-fg-color) 12%, transparent);
+  background: var(--md-default-bg-color);
+  box-shadow: var(--md-shadow-z2);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.md-typeset .card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--md-shadow-z3);
+  border-color: color-mix(in oklab, var(--md-accent-fg-color) 35%, transparent);
+}
+.md-typeset .card .card-body { padding: 1rem 1.1rem; }
+
+/* Author card layout */
+.md-typeset .author-card .card-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: .8rem 1.2rem;
+}
+.md-typeset .author-card .card-item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: .6rem .7rem;
+  align-items: start;
+}
+.md-typeset .author-card .md-icon { width: 18px; height: 18px; margin-top: .2rem; }
+.md-typeset .author-card .card-title { font-weight: 700; font-size: .88rem; opacity: .85; }
+.md-typeset .author-card .card-text { font-size: .95rem; }
+
+/* Generic info card */
+.md-typeset .info-card { cursor: default; }
+.md-typeset .info-card[onclick] { cursor: pointer; }
+.md-typeset .info-card .card-head {
+  display: inline-flex; align-items: center; gap: .5rem; margin-bottom: .35rem;
+}
+.md-typeset .info-card .md-icon { width: 18px; height: 18px; }
+.md-typeset .info-card .card-heading { font-weight: 700; }
+.md-typeset .info-card .card-lines {
+  list-style: none; padding: 0; margin: .25rem 0 0 0;
+}
+.md-typeset .info-card .card-lines li { margin: .1rem 0; opacity: .95; }
+
+/* Optional palette accent ring */
+[data-md-color-scheme="default"] .card:hover {
+  border-color: color-mix(in oklab, var(--md-primary-fg-color) 40%, transparent);
+}
+
+.icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: .25rem;
+}
+
+/* Original */
+.kpi { display:flex; gap:.5rem; align-items:center; padding:1rem; border-radius:1rem; box-shadow:var(--md-shadow-z2); }
+.kpi.ok   { background: rgba(0, 200, 83, .08); }
+.kpi.warn { background: rgba(255, 171, 0, .10); }
+.kpi.bad  { background: rgba(229, 57, 53, .10); }
+.kpi .value { font-weight:700; font-size:1.05rem; }
+
+.pill { display:inline-block; padding:.15rem .6rem; border-radius:999px; background:rgba(0,0,0,.06); font-size:.8rem; }
+.grid.cols-2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:1rem; }
+.grid.cols-3 { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:1rem; }
+.grid.cols-4 { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:1rem; }
+.card { padding:1rem; border-radius:1rem; box-shadow:var(--md-shadow-z2); background:var(--md-default-bg-color); }
+.badge { font-size:.75rem; padding:.15rem .4rem; border-radius:6px; background:rgba(0,0,0,.06); }
+
+
+.md-logo { border-radius: 12px; overflow: hidden; }
+
+/* Headings tweak for brand feel */
+h1, h2 { letter-spacing: .2px; }
+h1 { font-weight: 700; }
+
+/* --- Modern table baseline --- */
+.table-modern {
+  --row-pad: .65rem .8rem;
+  --radius: .8rem;
+  --border: 1px solid var(--md-typeset-table-color);
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden; /* keep rounded corners */
+  box-shadow: var(--md-shadow-z2);
+}
+.table-modern table {
+  border-collapse: separate; /* we’ll use cell borders for separators */
+  border-spacing: 0;
+  width: 100%;
+}
+.table-modern thead th {
+  position: sticky; top: 0;
+  background: var(--md-default-bg-color);
+  padding: var(--row-pad);
+  font-weight: 600;
+  border-bottom: var(--border);
+  backdrop-filter: saturate(140%) blur(3px);
+}
+.table-modern tbody td {
+  padding: var(--row-pad);
+  border-bottom: 1px solid color-mix(in oklab, var(--md-default-fg-color) 10%, transparent);
+}
+.table-modern tbody tr:last-child td { border-bottom: 0; }
+
+/* --- Zebra + hover --- */
+.table-striped tbody tr:nth-child(2n) td { background: color-mix(in oklab, var(--md-default-fg-color) 4%, transparent); }
+.table-hover tbody tr:hover td { background: color-mix(in oklab, var(--md-accent-fg-color) 8%, transparent); }
+
+/* --- Dense/compact mode --- */
+.table-compact { --row-pad: .45rem .6rem; }
+
+/* --- Numeric alignment helpers --- */
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* --- Responsive scroll wrapper with shadow cues --- */
+.table-wrap { position: relative; overflow: auto; }
+.table-wrap::before, .table-wrap::after {
+  content: ""; position: sticky; top: 0; width: 24px; height: 100%;
+  pointer-events: none; z-index: 2;
+}
+.table-wrap::before { left: 0; background: linear-gradient(to right, rgba(0,0,0,.08), transparent); }
+.table-wrap::after  { right: 0; background: linear-gradient(to left,  rgba(0,0,0,.08), transparent); }
+
+/* --- Chip/badge styles you can use inside cells --- */
+.chip {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .2rem .55rem; border-radius: 999px; font-size: .8rem;
+  background: color-mix(in oklab, var(--md-accent-fg-color) 15%, transparent);
+}
+.chip.ok    { background: color-mix(in oklab, #00c853 25%, transparent); }
+.chip.warn  { background: color-mix(in oklab, #ffab00 25%, transparent); }
+.chip.bad   { background: color-mix(in oklab, #e53935 25%, transparent); }

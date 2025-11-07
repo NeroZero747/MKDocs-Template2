@@ -1,0 +1,23 @@
+{# docs/_includes/info_card.html #}
+{# Usage:
+{% with icon=".icons/material/information-outline.svg", title="ETL Job", lines=["Providers → Oracle", "3.0M rows, daily 02:00"], href="/etl/jobs/providers/" %}
+  {% include "info_card.html" %}
+{% endwith %}
+#}
+<div class="card info-card" {% if href %}onclick="location.href='{{ href | e }}'" role="link" tabindex="0"{% endif %}>
+  <div class="card-body">
+    <div class="card-head">
+      {% if icon %}
+        <span class="md-icon">{% include icon %}</span>
+      {% endif %}
+      {% if title %}<div class="card-heading">{{ title }}</div>{% endif %}
+    </div>
+    {% if lines %}
+      <ul class="card-lines">
+        {% for line in lines %}
+          <li>{{ line }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>

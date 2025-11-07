@@ -1,0 +1,197 @@
+/* Theme-aware tokens from Material */
+:root {
+  --tbl-radius: 0.8rem;
+  --tbl-shadow: var(--md-shadow-z2);
+  --tbl-shadow-hover: var(--md-shadow-z3);
+  --tbl-border: 1px solid var(--md-typeset-table-color);
+  --tbl-row-gap: 0.65rem 0.8rem;
+}
+
+/* Wrapper with shadow and sticky header */
+.table-modern {
+  border: var(--tbl-border);
+  border-radius: var(--tbl-radius);
+  overflow: hidden;
+  box-shadow: var(--tbl-shadow);
+  background: var(--md-default-bg-color);
+  transition: box-shadow 0.2s ease;
+}
+.table-modern:hover {
+  box-shadow: var(--tbl-shadow-hover);
+}
+
+.table-modern .table-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  backdrop-filter: saturate(140%) blur(3px);
+  background: var(--md-default-bg-color);
+}
+
+/* Simple-DataTables */
+.table-modern .dataTable-wrapper {
+  background: var(--md-default-bg-color);
+  border-radius: var(--tbl-radius);
+}
+.table-modern .dataTable-table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: separate;
+}
+.table-modern .dataTable-table thead th {
+  position: sticky;
+  top: 0;
+  padding: var(--tbl-row-gap);
+  border-bottom: var(--tbl-border);
+  font-weight: 600;
+  background: var(--md-default-bg-color);
+}
+.table-modern .dataTable-table tbody td {
+  padding: var(--tbl-row-gap);
+  border-bottom: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 10%, transparent);
+}
+.table-modern .dataTable-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.table-modern .dataTable-table tbody tr:hover td {
+  background: color-mix(in oklab, var(--md-accent-fg-color) 8%, transparent);
+}
+.table-modern .dataTable-top,
+.table-modern .dataTable-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: color-mix(in oklab, var(--md-default-fg-color) 3%, transparent);
+  border-bottom: var(--tbl-border);
+}
+.table-modern .dataTable-bottom {
+  border-top: var(--tbl-border);
+  border-bottom: none;
+}
+.table-modern .dataTable-input,
+.table-modern .dataTable-selector {
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.6rem;
+  border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 15%, transparent);
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+.table-modern .dataTable-pagination a {
+  border-radius: 0.5rem;
+  border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 15%, transparent);
+  padding: 0.25rem 0.5rem;
+}
+.table-modern .dataTable-pagination .active a {
+  background: color-mix(in oklab, var(--md-primary-fg-color) 22%, transparent);
+  color: var(--md-default-bg-color);
+}
+.table-modern .dataTable-info {
+  opacity: 0.8;
+  padding: 0 0.25rem;
+}
+.table-modern.table-striped .dataTable-table tbody tr:nth-child(2n) td {
+  background: color-mix(in oklab, var(--md-default-fg-color) 4%, transparent);
+}
+
+/* Grid.js */
+.table-modern .gridjs-container {
+  background: var(--md-default-bg-color);
+  border-radius: var(--tbl-radius);
+  border: var(--tbl-border);
+}
+.table-modern .gridjs-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+.table-modern .gridjs-thead th {
+  position: sticky;
+  top: 0;
+  background: var(--md-default-bg-color);
+  padding: var(--tbl-row-gap);
+  border-bottom: var(--tbl-border) !important;
+  font-weight: 600;
+}
+.table-modern .gridjs-tbody td {
+  padding: var(--tbl-row-gap) !important;
+  border-bottom: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 10%, transparent);
+}
+.table-modern .gridjs-tr:last-child td {
+  border-bottom: 0;
+}
+.table-modern .gridjs-tr:hover td {
+  background: color-mix(in oklab, var(--md-accent-fg-color) 8%, transparent);
+}
+.table-modern .gridjs-search {
+  padding: 0.6rem 0.75rem;
+  border-bottom: var(--tbl-border);
+  display: flex;
+  justify-content: flex-end;
+}
+.table-modern .gridjs-search input {
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.6rem;
+  border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 15%, transparent);
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+.table-modern .gridjs-footer {
+  padding: 0.6rem 0.75rem;
+  border-top: var(--tbl-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.table-modern .gridjs-pages button {
+  border-radius: 0.5rem !important;
+  border: 1px solid
+    color-mix(in oklab, var(--md-default-fg-color) 15%, transparent) !important;
+  padding: 0.25rem 0.5rem !important;
+}
+.table-modern .gridjs-pages button[disabled] {
+  opacity: 0.5;
+}
+.table-modern .gridjs-pages .gridjs-currentPage {
+  background: color-mix(
+    in oklab,
+    var(--md-primary-fg-color) 22%,
+    transparent
+  ) !important;
+  color: var(--md-default-bg-color) !important;
+}
+
+/* Compact mode */
+.table-modern.table-compact .dataTable-table thead th,
+.table-modern.table-compact .dataTable-table tbody td,
+.table-modern.table-compact .gridjs-thead th,
+.table-modern.table-compact .gridjs-tbody td {
+  padding: 0.4rem 0.55rem !important;
+}
+
+/* Header-embedded filters */
+.table-modern thead th{ vertical-align: bottom; }
+.table-modern .th-wrap{ display:grid; gap:4px; align-items:end; }
+.table-modern .th-label{ font-weight:600; line-height:1.1; }
+.table-modern .th-filter select,
+.table-modern .th-filter input{
+  width:100%;
+  padding:.35rem .5rem;
+  border-radius:.5rem;
+  border:1px solid color-mix(in oklab, var(--md-default-fg-color) 15%, transparent);
+  background:var(--md-default-bg-color);
+  color:var(--md-default-fg-color);
+  font-size:.85rem;
+}
+.table-modern .th-filter{ display:block; }
+.table-modern.table-compact .th-filter select,
+.table-modern.table-compact .th-filter input{
+  padding:.3rem .45rem;
+  font-size:.8rem;
+}
